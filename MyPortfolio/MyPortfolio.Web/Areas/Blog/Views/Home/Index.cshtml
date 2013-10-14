@@ -1,0 +1,40 @@
+﻿@model IEnumerable<BlogPostViewModel>
+
+@{
+    ViewBag.Title = "Blog Index";
+}
+
+<h2>Blog Posts</h2>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span10">
+            <div class="row-fluid">
+                @foreach (var blogPost in Model)
+                {
+                    <div class="blog-post-item">
+                        <div class="blog-post-item-header">
+                            <h3>
+                                <a href="/Blog/Posts/Details/@blogPost.Id">@blogPost.Title</a> 
+                            </h3>
+                            <span>Created at: @blogPost.CreationDate.ToShortDateString()</span>
+                        </div>
+                        <div class="blog-post-item-content">
+                            @blogPost.Content
+                        </div>
+                        <div class="blog-post-item-footer">
+                            <span>@blogPost.ViewsCount views</span><br />
+                            <a href="#">View the last five comments</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="span2">
+            <!--Sidebar content-->
+        </div>
+    </div>
+   
+</div>
+
+

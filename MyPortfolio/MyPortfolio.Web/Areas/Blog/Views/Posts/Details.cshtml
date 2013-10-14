@@ -1,0 +1,126 @@
+﻿@model BlogPostViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="blog-post-detailed">
+    <div class="blog-post-detailed-header">
+        <h2>@Model.Title</h2>
+        <span>Date: @Model.CreationDate.ToShortDateString()</span><br />
+        <span>@Model.ViewsCount views</span>
+    </div>
+    <div class="blog-post-detailed-content">
+        @Model.Content
+    </div>
+    <div class="blog-post-detailed-footer"></div>
+</div>
+
+<div class="blog-post-all-comments">
+    <div id="comments-container">
+        @foreach (var comment in Model.Comments)
+        {
+            @Html.Partial("_CommentPartial", GetCommentViewModel.FromComment(comment))
+        }
+    </div>
+    <div id="comment-box-wrap">
+        @using (Ajax.BeginForm("PostComment", "Posts", new AjaxOptions
+        {
+            HttpMethod = "Post",
+            InsertionMode = InsertionMode.InsertAfter,
+            UpdateTargetId = "comments-container",
+            OnFailure = "commentPostFailure",
+            OnSuccess = "removeCommentBoxText"
+        }))
+        {
+            @Html.AntiForgeryToken();
+            
+            if(!User.Identity.IsAuthenticated) 
+            {
+                <input type="text" name="AuthorName" placeholder="Author name" id="author-name"/><br />
+                <input type="text" name="AuthorEmail" placeholder="Author email" id="author-email"/><br />
+            }
+            else {
+                <input type="hidden" name="AuthorName" placeholder="Author name" value="@User.Identity.Name"/><br />
+                <input type="hidden" name="AuthorEmail" placeholder="Author email" value="somemail@abv.org" />
+            }
+            <input type="hidden" name="BlogPostId" value="@Model.Id" />
+            <textarea name="Comment" placeholder="Write down your comment" id="comment-box"></textarea><br />
+            <div>
+                Characters: 
+                <span id="characters-count">0</span>
+                /250
+            </div>
+            
+            <div class="recaptcha-wrap">
+                @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
+            </div>
+
+            <input type="submit" value="Publish comment" />
+            
+            <div id="comment-box-err"></div>
+        }
+       
+    </div>
+</div>
+
+@section PostCommentHandlerScripts
+{
+    <script>
+        (function () {
+            // On Post comment failure
+            function commentPostFailure(err) {
+                // Strange but when we parse for the 
+                // first time slashes are removed
+                var errorsJson = $.parseJSON(err.responseText)
+                errorJson = $.parseJSON(errorsJson);
+
+                var i;
+                var errors = errorJson["Errors"]
+                
+                var errorsHtml = "";
+
+                for (i = 0; i < errors.length; i++) {
+                    errorsHtml += errors[i].ErrorMessage + '<br />';
+                }
+
+                $('#comment-box-err').html(errorsHtml);
+            }
+
+            // On Post comment success
+            function removeCommentBoxText() {
+                $('#comment-box').val("");
+                $('#author-name').val("");
+                $('#author-email').val("");
+                $('#comment-box-err').val("");
+                $('#characters-count').text(0);
+                Recaptcha.reload();
+            }
+
+            // Count comment box characters
+            $('#comment-box').on('input', function () {
+                var COMMENT_MAX_LENGTH = 250;
+                var commentValue = $('#comment-box').val();
+                var newCount = commentValue.length;
+                
+                $('#characters-count').text(newCount)
+
+                if (newCount >= COMMENT_MAX_LENGTH) {
+                    $('#comment-box').val(commentValue.substring(0, COMMENT_MAX_LENGTH - 1));
+                    $('#characters-count').text(COMMENT_MAX_LENGTH)
+                    newCount = COMMENT_MAX_LENGTH;
+                }
+
+                if (newCount > COMMENT_MAX_LENGTH || newCount < 8) {
+                    $('#characters-count').css("color", "red");
+                }
+                else {
+                    $('#characters-count').css("color", "black");
+                }
+            });
+
+            window.commentPostFailure = commentPostFailure;
+            window.removeCommentBoxText = removeCommentBoxText;
+        })();
+    </script>
+}
