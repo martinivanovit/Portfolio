@@ -18,6 +18,8 @@
                 </button>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
+                        <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" })</li>
+                        <li>@Html.ActionLink("Create", "Create", "Posts")</li>
                     </ul>
                 </div>
             </div>
@@ -37,5 +39,7 @@
     @RenderSection("scripts", required: false)
     
     @RenderSection("PostCommentHandlerScripts", required: false)
+    @RenderSection("blogPostsScript", required: false)
+    @RenderSection("richtTextEditor", required: false)
 </body>
 </html>

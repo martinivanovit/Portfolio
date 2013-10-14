@@ -11,7 +11,7 @@
         <span>@Model.ViewsCount views</span>
     </div>
     <div class="blog-post-detailed-content">
-        @Model.Content
+        @Html.Raw(Model.Content)
     </div>
     <div class="blog-post-detailed-footer"></div>
 </div>
@@ -36,22 +36,25 @@
             @Html.AntiForgeryToken();
             
             if(!User.Identity.IsAuthenticated) 
-            {
+            {   
                 <input type="text" name="AuthorName" placeholder="Author name" id="author-name"/><br />
                 <input type="text" name="AuthorEmail" placeholder="Author email" id="author-email"/><br />
             }
             else {
-                <input type="hidden" name="AuthorName" placeholder="Author name" value="@User.Identity.Name"/><br />
-                <input type="hidden" name="AuthorEmail" placeholder="Author email" value="somemail@abv.org" />
+                <input type="hidden" name="AuthorName" value="@User.Identity.Name"/><br />
+                <input type="hidden" name="AuthorEmail" value="somemail@abv.org" />
             }
             <input type="hidden" name="BlogPostId" value="@Model.Id" />
-            <textarea name="Comment" placeholder="Write down your comment" id="comment-box"></textarea><br />
-            <div>
-                Characters: 
-                <span id="characters-count">0</span>
-                /250
+
+            <div id="comment-textarea">
+                <textarea name="Comment" placeholder="Write down your comment" id="comment-box"></textarea><br />
+                <div>
+                    Characters:
+                    <span id="characters-count">0</span>
+                    /250
+                </div>
             </div>
-            
+
             <div class="recaptcha-wrap">
                 @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
             </div>

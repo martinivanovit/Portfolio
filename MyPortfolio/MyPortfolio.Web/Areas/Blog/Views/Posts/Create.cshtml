@@ -1,0 +1,45 @@
+﻿@model MyPortfolio.Models.BlogPost
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset class="form-horizontal">
+        <legend>BlogPost</legend>
+               
+        <div class="control-group">
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Title, new { placeholder = "Post title goes here." })
+                @Html.ValidationMessageFor(model => model.Title, null, new { @class = "help-inline" })
+            </div>
+            <div class="controls">
+                @Html.TextAreaFor(model => model.Content, new { id="rich-editor" })
+                @Html.ValidationMessageFor(model => model.Content, null, new { @class = "help-inline" })
+            </div>
+        </div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Create" class="btn" />
+        </div>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section richtTextEditor {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#rich-editor').jqte();
+    </script>
+}
+

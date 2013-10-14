@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace MyPortfolio.Models
 {
@@ -17,11 +18,12 @@ namespace MyPortfolio.Models
         public string Title { get; set; }
 
         [Required]
+        [AllowHtml]
         public string Content { get; set; }
 
         public int ViewsCount { get; set; }
 
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
 

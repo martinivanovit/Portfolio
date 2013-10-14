@@ -10,7 +10,8 @@ namespace MyPortfolio.Web
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery.unobtrusive-ajax.js"));
+                        "~/Scripts/jquery.unobtrusive-ajax.js",
+                        "~/Scripts/jQueryTE/jquery-te-1.4.0.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -26,7 +27,9 @@ namespace MyPortfolio.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/bootstrap-responsive.css"));
+                      "~/Content/bootstrap-responsive.css",
+                      "~/Content/jQueryTE/jquery-te-1.4.0.css"));
+           
         }
     }
 }

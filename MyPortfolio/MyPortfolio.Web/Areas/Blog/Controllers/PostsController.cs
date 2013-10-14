@@ -11,6 +11,7 @@ using System.Text;
 using System.Web.Script.Serialization;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
+using System.Data.Entity.Validation;
 
 namespace MyPortfolio.Web.Areas.Blog.Controllers
 {
@@ -29,6 +30,51 @@ namespace MyPortfolio.Web.Areas.Blog.Controllers
             postModel.Comments = post.Comments;
 
             return View(postModel);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(SubmitBlogPostModel postModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = User.Identity.GetUserId();
+                var user = this.Data
+                    .ApplicationUsers
+                    .All()
+                    .FirstOrDefault(u => u.Id == userId);
+
+                var blogPost = new BlogPost
+                {
+                    AuthorId = userId,
+                    Author = user,
+                    Content = postModel.Content,
+                    CreationDate = DateTime.Now,
+                    Title = postModel.Title
+                };
+
+                this.Data.BlogPosts.Add(blogPost);
+                
+                try
+                {
+                    this.Data.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw new DbEntityValidationException();
+                }
+
+                this.Response.Redirect("~/Blog/Posts/Details/" + blogPost.Id);
+                return null;
+            }
+
+            return View(new BlogPost() { Content = postModel.Content, Title = postModel.Title });
+            
         }
 
         [HttpPost]
