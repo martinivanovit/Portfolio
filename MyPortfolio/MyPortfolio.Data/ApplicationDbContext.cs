@@ -11,5 +11,7 @@ namespace MyPortfolio.Data
         public IDbSet<Comment> Comments { get; set; }
 
         public IDbSet<FeedBack> FeedBack { get; set; }
+
+        public IDbSet<Project> Projects { get; set; }
     }
 }

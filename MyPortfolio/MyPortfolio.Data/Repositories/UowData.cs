@@ -74,5 +74,13 @@ namespace MyPortfolio.Data.Repositories
                 return this.GetRepository<Comment>();
             }
         }
+
+        public IRepository<Project> Projects
+        {
+            get
+            {
+                return this.GetRepository<Project>();
+            }
+        }
     }
 }

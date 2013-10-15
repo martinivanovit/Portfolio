@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BlogPostViewModel>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search results for "@this.Request.Params["query"]"</h2>
+
+<div class="container-fluid">
+    <div class="row">
+        @using (Html.BeginForm("Search", "Posts"))
+        {
+            <input type="text" name="query" value="" />
+            <input type="submit" value="Search" id="search-btn" />
+        }
+    </div>
+    <div class="row-fluid">
+
+        <div class="span10">
+            <div class="row-fluid" id="blog-posts-container">
+                @{Html.RenderPartial("_BlogPostsList", Model);}
+            </div>
+
+        </div>
+
+        <div class="span2">
+            <!--Sidebar content-->
+        </div>
+
+    </div>
+</div>

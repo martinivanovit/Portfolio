@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MyPortfolio.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+    <tfoot>
+        <tr>
+            <td>
+                <ul class="custom-pager">
+
+                    @for (int i = 0; i < ViewBag.PagesCount; i++)
+                    {
+                        var selectedClass = String.Empty;
+
+                        if (i + 1 == (ViewBag.CurrentPage ?? 1))
+                        {
+                            selectedClass = "custom-pager-selected";
+                        }
+
+                        <li class="custom-pager-item @selectedClass">
+                            @Html.ActionLink((i + 1).ToString(), "Index", new { page = i + 1 })
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    </tfoot>
+
+</table>

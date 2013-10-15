@@ -7,42 +7,37 @@
 <h2>Blog Posts</h2>
 
 <div class="container-fluid">
+    <div class="row">
+        @using (Html.BeginForm("Search", "Posts"))
+        {
+            <input type="text" name="query" value="" />
+            <input type="submit" value="Search" id="search-btn" />
+        }
+    </div>
     <div class="row-fluid">
 
         <div class="span10">
-            <div class="row-fluid">
-                @foreach (var blogPost in Model)
-                {
-                    <div class="blog-post-item">
-
-                        <div class="blog-post-item-header">
-                            <h3>
-                                <a href="/Blog/Posts/Details/@blogPost.Id">@blogPost.Title</a> 
-                            </h3>
-                            <span>Created at: @blogPost.CreationDate.ToShortDateString()</span>
-                        </div>
-
-                        <div class="blog-post-item-content">
-                            @blogPost.Content
-                        </div>
-
-                        <div class="blog-post-item-footer">
-                            <span>@blogPost.ViewsCount views</span><br />
-                            <a href="#" class="show-recent-comments">Show recent comments</a>
-                        </div>
-
-                        <ul class="recent-comments" style="display:none;">
-                            @foreach (var comment in blogPost.Comments)
-                            {
-                                <li>
-                                    "@comment.Content" by @comment.AuthorName
-                                </li>
-                            }
-                        </ul>
-
-                    </div>
-                }
+            <div class="row-fluid" id="blog-posts-container">
+                @{Html.RenderPartial("_BlogPostsList", Model);}
             </div>
+
+            <div class="load-more-form">
+                @using (Ajax.BeginForm("GetPosts", "Home", new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        InsertionMode = InsertionMode.InsertAfter,
+                        UpdateTargetId = "blog-posts-container",
+                        OnFailure = "blog.ajaxLoadPostsFailure",
+                        OnSuccess = "blog.ajaxLoadPostsSuccess"
+                    }))
+                {
+                    @Html.Hidden("postsToSkip", "", new { id = "posts-to-skip" })
+                    <input type="submit" value="Load more" id="load-more-btn" />
+                }
+
+                @Html.Hidden("allPostsCount", (int?)ViewBag.AllPostsCount, new { id = "all-posts-count" })
+            </div>
+
         </div>
 
         <div class="span2">
@@ -50,26 +45,60 @@
         </div>
 
     </div>
-   
 </div>
 
 @section blogPostsScript {
     <script>
-        $(".show-recent-comments").on("click", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $(this).parent().next(".recent-comments").slideDown("slow", function () {
-                // Animation complete.
-            });
-        });
+        var blog = {};
 
-        $(".recent-comments").on("mouseleave", function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            $(this).slideUp("slow", function () {
-                // Animation complete.
-            });
-        });
+        (function () {
+
+            function attachPostsEvents() {
+                $(".show-recent-comments").on("click", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).parent().next(".recent-comments").slideDown("slow", function () {
+                        // Animation complete.
+                    });
+                });
+
+                $(".recent-comments").on("mouseleave", function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $(this).slideUp("slow", function () {
+                        // Animation complete.
+                    });
+                });
+            }
+            attachPostsEvents();
+
+            function onLoadMoreFailure(err) {
+                if (err.statusText === 'No posts') {
+                    $('#load-more-btn').hide();
+                }
+            }
+
+            function onLoadMoreSuccess(success) {
+                setNewPostsCount();
+                attachPostsEvents();
+            }
+
+            blog.ajaxLoadPostsFailure = onLoadMoreFailure;
+            blog.ajaxLoadPostsSuccess = onLoadMoreSuccess;
+
+            function setNewPostsCount() {
+                var postsCount = $('.blog-post-item').length;
+                $('#posts-to-skip').val(postsCount);
+
+                var allPostsCount = $('#all-posts-count').val();
+
+                if (postsCount >= allPostsCount) {
+                    $('#load-more-btn').hide();
+                }
+
+            }
+            setNewPostsCount();
+        })();
     </script>
 }
 

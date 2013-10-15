@@ -33,3 +33,34 @@ input[type="checkbox"].input-validation-error {
   background-color: white;
   border-style:none;
 }
+
+/* Custom pager styles */
+
+.custom-pager {
+    margin: 0;
+    padding: 0;
+}
+
+.custom-pager-item {
+    display: inline-block;
+    padding: 3px 10px 3px 10px;
+    border: 1px solid black;
+    border-left: none;
+    margin-right: -4px;
+}
+
+    .custom-pager-item:first-child {
+        border-left: 1px solid black;
+    }
+    .custom-pager-item:hover {
+        background: #d8d8d8;
+    }
+
+.custom-pager-selected {
+    background: #5788CF;
+}
+.custom-pager-selected a {
+    color: white;
+}
+
+/*--------------------*/

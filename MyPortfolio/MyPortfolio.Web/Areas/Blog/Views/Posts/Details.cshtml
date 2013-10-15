@@ -68,11 +68,12 @@
 </div>
 
 @section PostCommentHandlerScripts
-{
+{@Scripts.Render("~/bundles/jqueryval")
     <script>
         (function () {
             // On Post comment failure
             function commentPostFailure(err) {
+                console.log(err.responseText);
                 // Strange but when we parse for the 
                 // first time slashes are removed
                 var errorsJson = $.parseJSON(err.responseText)

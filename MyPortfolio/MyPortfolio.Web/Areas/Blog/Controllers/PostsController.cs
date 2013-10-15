@@ -12,9 +12,11 @@ using System.Web.Script.Serialization;
 using Recaptcha.Web;
 using Recaptcha.Web.Mvc;
 using System.Data.Entity.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyPortfolio.Web.Areas.Blog.Controllers
 {
+    [ValidateInputAttribute(false)]
     public class PostsController : BaseController
     {
         public ActionResult Index(int? id)
@@ -32,12 +34,14 @@ namespace MyPortfolio.Web.Areas.Blog.Controllers
             return View(postModel);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create(SubmitBlogPostModel postModel)
         {
@@ -74,7 +78,51 @@ namespace MyPortfolio.Web.Areas.Blog.Controllers
             }
 
             return View(new BlogPost() { Content = postModel.Content, Title = postModel.Title });
+        }
+
+        [Authorize]
+        public ActionResult Edit(int id)
+        {
+            var blogPost = this.Data.BlogPosts.GetById(id);
             
+            if (User.Identity.GetUserName() == blogPost.Author.UserName || 
+                User.IsInRole("Admin"))
+            {
+                return View("Create", blogPost);    
+            }
+
+            this.Response.Redirect("~/Blog/Posts/Details/" + blogPost.Id);
+            return null;
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(SubmitBlogPostModel postModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var blogPostId = postModel.Id.GetValueOrDefault();
+                
+                var blogPost = this.Data.BlogPosts.GetById(blogPostId);
+                blogPost.Title = postModel.Title;
+                blogPost.Content = postModel.Content;
+                blogPost.LastModificationDate = DateTime.Now;
+
+                try
+                {
+                    this.Data.SaveChanges();
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    throw new DbEntityValidationException();
+                }
+
+                this.Response.Redirect("~/Blog/Posts/Details/" + blogPost.Id);
+                return null;
+            }
+
+            return View(new BlogPost() { Content = postModel.Content, Title = postModel.Title });
         }
 
         [HttpPost]
@@ -145,6 +193,24 @@ namespace MyPortfolio.Web.Areas.Blog.Controllers
             }
             var json = new JavaScriptSerializer().Serialize(errorsObj);
             return json;
+        }
+
+        // For now searches only by title
+        // TODO: Implement search by tags
+        public ActionResult Search(string query)
+        {
+            var result = this.Data
+                .BlogPosts.All();
+
+            if (!String.IsNullOrEmpty(query))
+            {
+                result = result.Where(p => p.Title.Contains(query));    
+            }
+
+            var resultModel = result.OrderByDescending(b => b.CreationDate)
+                .Select(BlogPostViewModel.FromBlogPost);
+
+            return View(resultModel);
         }
 	}
 }

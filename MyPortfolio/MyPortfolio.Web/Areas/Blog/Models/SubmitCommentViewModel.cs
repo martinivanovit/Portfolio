@@ -11,6 +11,7 @@ namespace MyPortfolio.Web.Areas.Blog.Models
         [Required]
         [MinLength(8)]
         [MaxLength(250)]
+        [RegularExpression("<(.|\n)*?>", ErrorMessage="Comment field cannot contain HTML tags")]
         public string Comment { get; set; }
 
         [Required]

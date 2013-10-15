@@ -58,6 +58,7 @@
     <Compile Include="BlogPost.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="FeedBack.cs" />
+    <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
