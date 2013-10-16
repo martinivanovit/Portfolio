@@ -16,11 +16,26 @@ namespace MyPortfolio.Data.Migations
 
         protected override void Seed(ApplicationDbContext context)
         {
+            
             if (context.BlogPosts.Count() > 0)
             {
                 return;
             }
 
+            for (int k = 0; k < 15; k++)
+            {
+                var project = new Project
+                {
+                    DemoUrl = "http://abv.bg",
+                    SourceUrl = "http://abv.bg",
+                    Name = "Project #" + k,
+                    ImageUrl = "Migations/img/project-image-seed.png",
+                    Description = "Lorem ipsum description for this impressive project with the name 'Project #'"
+                };
+
+                context.Projects.Add(project);
+            }
+            
             var user = new ApplicationUser
             {
                 UserName = "martin"

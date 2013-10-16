@@ -1,0 +1,161 @@
+﻿@model IEnumerable<ProjectViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    @foreach (var project in Model)
+    {
+        <div class="span4">
+            <div class="project-image-wrap" style="background-image: url('@project.ImageUrl'); background-size: 100% 100%">
+                <div class="project-img-cover" >
+                    <div>
+                        <h2>@project.Name</h2>
+                        <a href="#" class="project-link btn btn-inverse btn-large">Demo</a>
+                        <a href="#" class="project-link btn btn-success btn-large">Source</a>
+                        <p>@project.Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .project-image-wrap {
+        display: inline-block;
+        width: 100%;
+        height: 300px;
+        margin: 10px;
+        float: left;
+        position: relative;
+    }
+
+    .project-img-cover {
+        opacity: 0.9;
+        background: #90CA77;
+        color: white;
+        display: none;
+        width: 1px;
+        height: 1px;
+        position: absolute;
+    }
+
+.project-img-cover > div {
+    margin: 60px auto;
+    width: 200px; 
+    height:100px;
+}
+    .project-img-cover > div h2 {
+        font-size: 18pt;
+    }
+
+    .project-link {
+        text-shadow: none;
+        box-shadow: none;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 0px;
+    }
+</style>
+
+@section projectsHomeScript
+{
+
+<script>
+   $(function() {
+        $(".project-image-wrap").hover(function(e) {
+            var el_pos = $(this).offset();
+            var edge = closestEdge(e.pageX - el_pos.left, e.pageY - el_pos.top, $(this).width(), $(this).height());
+				
+            var element = $(this).find('.project-img-cover');
+            element.css("position", "absolute");
+				
+            if(edge == 'left') {
+                element.css("height", "100%");	
+                element.show().animate({width: '100%'}, 200);
+            } else if(edge == 'top') {
+                element.css("width", "100%");	
+                element.show().animate({height: '100%'}, 200);
+            } else if(edge == 'bottom') {
+                element.css("bottom", "0");
+                element.css("width", "100%");	
+                element.show().animate({height: '100%'}, 200);
+            } else if(edge == 'right') {
+                element.css("position", "static");
+                element.css("float", "right");
+                element.css("height", "100%");	
+                element.show().animate({width: '100%'}, 200);
+            }
+				
+        }, function(e) {
+            var el_pos = $(this).offset();
+            var edge = closestEdge(e.pageX - el_pos.left, e.pageY - el_pos.top, $(this).width(), $(this).height());
+				
+            var element = $(this).find('.project-img-cover');
+            var self = this;
+				
+            element.css("float", "none");
+				
+            if(edge == 'left') {
+                element.animate({width: '1px'}, 200);
+                setTimeout(function() {
+                    element.css("height", "1px");	
+                    element.hide();
+                }, 200);
+            } else if(edge == 'top') {
+                element.css("bottom", "");
+                element.animate({height: '1px'}, 200, function() {
+                    element.css("width", "1px");	
+                    element.hide();
+                });
+            } else if(edge == 'bottom') {
+                element.css("position", "absolute");
+                element.css("bottom", "0");
+                element.animate({height: '1px'}, 200);
+                setTimeout(function() {
+                    element.css("bottom", "");
+                    element.css("width", "1px");	
+                    element.hide();
+                }, 200);
+            } else if(edge == 'right') {
+                element.css("position", "static");
+                element.css("float", "right");
+						
+                element.animate({width: '1px'}, 200);
+					
+                setTimeout(function() {
+                    element.css("height", "1px");	
+                    element.hide();
+                }, 200);
+            }
+        });
+    });
+
+    function closestEdge(x,y,w,h) {
+        var topEdgeDist = distMetric(x,y,w/2,0);
+        var bottomEdgeDist = distMetric(x,y,w/2,h);
+        var leftEdgeDist = distMetric(x,y,0,h/2);
+        var rightEdgeDist = distMetric(x,y,w,h/2);
+			
+        var min = Math.min(topEdgeDist,bottomEdgeDist,leftEdgeDist,rightEdgeDist);
+        switch (min) {
+            case leftEdgeDist:
+                return "left";
+            case rightEdgeDist:
+                return "right";
+            case topEdgeDist:
+                return "top";
+            case bottomEdgeDist:
+                return "bottom";
+        }
+    }
+     
+    function distMetric(x,y,x2,y2) {
+        var xDiff = x - x2;
+        var yDiff = y - y2;
+        return (xDiff * xDiff) + (yDiff * yDiff);
+    }
+</script>
+}

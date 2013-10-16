@@ -162,6 +162,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Admin\Models\EditCommentModel.cs" />
     <Compile Include="Areas\Blog\BlogAreaRegistration.cs" />
     <Compile Include="Areas\Blog\Controllers\HomeController.cs" />
@@ -170,6 +171,9 @@
     <Compile Include="Areas\Blog\Models\SubmitBlogPostModel.cs" />
     <Compile Include="Areas\Blog\Models\SubmitCommentViewModel.cs" />
     <Compile Include="Areas\Blog\Models\BlogPostViewModel.cs" />
+    <Compile Include="Areas\Work\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Work\Models\ProjectViewModel.cs" />
+    <Compile Include="Areas\Work\WorkAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -267,6 +271,15 @@
     <Content Include="Areas\Admin\Views\Comments\Index.cshtml" />
     <Content Include="Areas\Blog\Views\Shared\_BlogPostsList.cshtml" />
     <Content Include="Areas\Blog\Views\Posts\Search.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Projects\Index.cshtml" />
+    <Content Include="Areas\Work\Views\web.config" />
+    <Content Include="Areas\Work\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Work\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Work\Views\Home\Index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
