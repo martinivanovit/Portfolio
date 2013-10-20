@@ -30,10 +30,11 @@
                     <li>
                         <a href="#how" class="link-btn">How /</a>
                     </li>
-                    <li>
+                    <li class="construction">
                         @Html.ActionLink("Work /", "Index")
+                        <span class="under-construction">Under Construction</span>
                     </li>
-                    <li>
+                    <li class="construction">
                         @Html.ActionLink("Blog", "Index")
                     </li>
                 </ul>
@@ -153,6 +154,22 @@
     @RenderSection("scripts", required: false)
 
     <script>
+
+        //DELETE LATER
+
+        $('.construction').on('click', function (ev) {
+            ev.preventDefault();
+        })
+
+        $('.construction').hover(function () {
+            $('.under-construction').show();
+        }, function () {
+            $('.under-construction').hide();
+        })
+
+        //----------------
+
+
         $(window).on('scroll', function () {
 
             var elements = $('.skills-partial div > ul li');

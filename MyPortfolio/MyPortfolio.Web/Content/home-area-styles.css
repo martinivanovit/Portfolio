@@ -44,6 +44,17 @@ body {
     text-decoration: none;
 }
 
+
+.under-construction {
+    display: none;
+    position: absolute;
+    margin-top:24px;
+    margin-left: -60px;
+    width: 130px;
+    padding: 0 4px 0 4px;
+    background: #C1C1C1;
+}
+
 /*----------------------------*/
 
 .main-container {
@@ -60,7 +71,7 @@ body {
 .contacts-partial {
     height: 100%;
     width: 100%;
-    padding-top: 10%;
+    padding-top: 4%;
 }
 
 .home-partial, 
@@ -76,7 +87,7 @@ body {
 .contacts-partial > div {
     width: 40%;
     height: 100%;
-    margin: 30% auto;
+    margin: 0 auto;  /*10%*/
     margin-top: 2%;
     text-align: center;
     overflow: hidden;
@@ -125,7 +136,7 @@ body {
     width: 50%;
     padding:0;
     margin: 0;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
  .skills-partial div > ul li {
@@ -198,6 +209,9 @@ body {
 .skills-partial div > ul.front-end-skills li:nth-child(5):hover > .js-frameworks{
     display: inline;
 }
+
+
+
 
 
 /*Email form*/
