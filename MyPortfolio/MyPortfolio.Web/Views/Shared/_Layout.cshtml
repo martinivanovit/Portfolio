@@ -44,7 +44,7 @@
     <div class="main-container">
         <div class="home-partial">
             <div>
-                <h1>Martin Ivanov</h1>
+                <h1></h1>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
@@ -126,17 +126,6 @@
                 <p>Get in touch</p>
                 <div class="facebook-btn"></div>
                 <div class="google-btn"></div>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
-                    Cum sociis natoque penatibus et magnis dis parturient montes,
-                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
-                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
-                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
-                </p>
                 <form class="email-form">
                     <input type="text" name="name" value="" placeholder="You Email Here" /> <br />
                     <textarea placeholder="Your Message Here"></textarea>
@@ -169,6 +158,7 @@
 
         //----------------
 
+        var currentPage = window.location.hash;
 
         $(window).on('scroll', function () {
 
@@ -207,6 +197,8 @@
 
             var id = $(this).attr('href');
 
+            currentPage = id;
+
             var topPosition = 0;
             if (id.length > 1) {
                 topPosition = $(id).offset().top;
@@ -217,6 +209,9 @@
             }, 500, function () {
                 window.location.hash = id;
             });
+        });
+
+        $(window).resize(function () {
         });
     </script>
 </body>

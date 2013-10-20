@@ -61,6 +61,7 @@ body {
     /*height: 55%;*/
     height: 100%;
     width: 100%;
+    position:absolute;
 }
 
 
@@ -101,6 +102,14 @@ body {
     font-family: 'Agency FB Bold';
     font-size: 72px;
 }
+
+    .home-partial h1 {
+        width: 192px;
+        height: 98px;
+        margin: 0 auto;
+        background: url('../../img/logo-martin.png');
+    }
+
 .home-partial h1,
 .how-was-made-partial h1,
 .contacts-partial h1 {
@@ -210,6 +219,25 @@ body {
     display: inline;
 }
 
+
+/*Contact me - Social Icons*/
+
+.facebook-btn,
+.google-btn {
+    width:80px;
+    height:80px;
+    background: url('../../img/facebook-google-icons.png');
+}
+.facebook-btn:hover,
+.google-btn:hover {
+    background: url('../../img/facebook-google-icons-colored.png');
+}
+
+.google-btn,
+.google-btn:hover {
+    background-position: 80px 0;
+}
+/*------------------------*/
 
 
 
