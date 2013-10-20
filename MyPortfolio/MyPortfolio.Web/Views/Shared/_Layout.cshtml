@@ -43,13 +43,13 @@
     <div class="main-container">
         <div class="home-partial">
             <div>
-                <h1>Home Page</h1>
+                <h1>Martin Ivanov</h1>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio. 
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
                     Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
-                    Cum sociis natoque penatibus et magnis dis parturient montes, 
-                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis, 
+                    Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
                     tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
                     nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
                     Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
@@ -92,17 +92,31 @@
         <div class="skills-partial" id="skills">
             <div>
                 <h1>Skills</h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
-                    Cum sociis natoque penatibus et magnis dis parturient montes,
-                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
-                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
-                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
-                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
-                </p>
+                <ul class="back-end-skills">
+                    <li data-width="200">C#</li>
+                    <li data-width="190">OOP</li>
+                    <li data-width="130">ASP.NET MVC</li>
+                    <li data-width="125">ASP.NET Web Forms</li>
+                    <li data-width="110">ASP.NET Web API</li>
+                    <li data-width="110">Web Services</li>
+                    <li data-width="80">SQL</li>
+                    <li data-width="130">Databases</li>
+                    <li data-width="190">Entity Framework</li>
+                </ul>
+                <ul class="front-end-skills">
+                    <li data-width="200">HTML5</li>
+                    <li data-width="160">CSS</li>
+                    <li data-width="180">Javascript</li>
+                    <li data-width="195">jQuery</li>
+                    <li data-width="120">
+                        <span>Javascript Frameworks</span><br />
+                        <span class="js-frameworks">
+                            Kendo UI, Underscore.js, <br />
+                            Mustache.js, Sammy.js
+                        </span>
+                    </li>
+                </ul>
+
             </div>
         </div>
         <div class="contacts-partial" id="contacts">
@@ -127,18 +141,49 @@
                     <textarea placeholder="Your Message Here"></textarea>
                 </form>
             </div>
-
-            @RenderBody()
-            <footer style="margin:0;padding:0;height: 10px;">
-                <p style="margin:0;padding:0">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
         </div>
+        @RenderBody()
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <script>
+        $(window).on('scroll', function () {
+
+            var elements = $('.skills-partial div > ul li');
+            var visibleElements = $('.skills-partial div > ul');
+            var i;
+
+            for (i = 0; i < elements.length; i++) {
+                var element = $(elements[i]);
+                if (isScrolledIntoView(element)) {
+                    if (element.width() === 0) {
+                        element.animate({ width: element.attr('data-width') + 'px' }, 300);
+                    }
+
+                } else {
+                    element.css("width", "0px");
+
+                }
+            }
+
+            function isScrolledIntoView(elem) {
+                var docViewTop = $(window).scrollTop();
+                var docViewBottom = docViewTop + $(window).height();
+
+                var elemTop = $(elem).offset().top;
+                var elemBottom = elemTop + $(elem).height();
+
+                return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+            }
+        });
+
+
         $('.link-btn').on('click', function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
