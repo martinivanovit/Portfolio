@@ -1,0 +1,138 @@
+﻿html, body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding: 0;
+}
+
+/* NAVGIATION */
+
+.navbar-container {
+    height: 40px;
+    width: 100%;
+    position: fixed;
+}
+.navbar-background {
+    height: 100%;
+    opacity: 0.7;
+    background: #0b141b;
+}
+
+.navbar-content {
+    position:absolute;
+    margin-top: -32px;
+}
+
+.navbar-content ul {
+}
+.navbar-content ul > li {
+    display: inline;
+}
+.navbar-content ul > li > a {
+    color: #C1C1C1;
+    font-family: 'Myriad Pro';
+    font-weight: bold;
+    font-size: 18px;
+}
+.navbar-content ul > li > a:hover {
+    color: #F2F2F2;
+    text-decoration: none;
+}
+
+/*----------------------------*/
+
+.main-container {
+    /*height: 55%;*/
+    height: 100%;
+    width: 100%;
+}
+
+
+.home-partial,
+.about-partial,
+.how-was-made-partial,
+.skills-partial,
+.contacts-partial {
+    height: 100%;
+    width: 100%;
+    padding-top: 10%;
+}
+
+.home-partial, 
+.how-was-made-partial,
+.contacts-partial {
+    background: #F2F2F2;
+}
+
+.home-partial > div,
+.about-partial > div,
+.how-was-made-partial > div,
+.skills-partial > div,
+.contacts-partial > div {
+    width: 40%;
+    height: 100%;
+    margin: 30% auto;
+    margin-top: 2%;
+    text-align: center;
+    overflow: hidden;
+}
+ 
+.home-partial h1,
+.about-partial h1,
+.how-was-made-partial h1,
+.skills-partial h1,
+.contacts-partial h1 {
+    font-family: 'Agency FB Bold';
+    font-size: 72px;
+}
+.home-partial h1,
+.how-was-made-partial h1,
+.contacts-partial h1 {
+    color: #16232E;
+}
+.about-partial h1,
+.skills-partial h1 {
+    color: #DBDBDB;
+}
+
+.home-partial p,
+.about-partial p,
+.how-was-made-partial p,
+.skills-partial p,
+.contacts-partial p {
+    margin-top: 8%;
+    font-family: 'Californian FB';
+    font-size: 18px;
+    font-weight: bold;
+}
+.home-partial p,
+.how-was-made-partial p,
+.contacts-partial p {
+    color: #353637;
+}
+.about-partial p,
+.skills-partial p {
+    color: #AEAEAE;
+}
+
+
+/*Email form*/
+.email-form {
+    margin: 10% auto;
+    background: gray;
+    padding-top: 16px;
+    padding-bottom: 30px;
+}
+
+.email-form textarea {
+    height: 150px;
+    width: 80%;
+    border-radius: 0;
+    resize: none;
+}
+.email-form input[type=text] {
+    
+    width: 80%;
+    border-radius: 0;
+    
+}

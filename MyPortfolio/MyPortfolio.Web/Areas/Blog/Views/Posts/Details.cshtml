@@ -4,27 +4,30 @@
     ViewBag.Title = "Details";
 }
 
-<div class="blog-post-detailed">
-    <div class="blog-post-detailed-header">
-        <h2>@Model.Title</h2>
-        <span>Date: @Model.CreationDate.ToShortDateString()</span><br />
-        <span>@Model.ViewsCount views</span>
-    </div>
-    <div class="blog-post-detailed-content">
-        @Html.Raw(Model.Content)
-    </div>
-    <div class="blog-post-detailed-footer"></div>
-</div>
 
-<div class="blog-post-all-comments">
-    <div id="comments-container">
-        @foreach (var comment in Model.Comments)
-        {
-            @Html.Partial("_CommentPartial", GetCommentViewModel.FromComment(comment))
-        }
+<div class="span8">
+
+    <div class="blog-post-detailed">
+        <div class="blog-post-detailed-header">
+            <h2>@Model.Title</h2>
+            <span>Date: @Model.CreationDate.ToShortDateString()</span><br />
+            <span>@Model.ViewsCount views</span>
+        </div>
+        <div class="blog-post-detailed-content">
+            @Html.Raw(Model.Content)
+        </div>
+        <div class="blog-post-detailed-footer"></div>
     </div>
-    <div id="comment-box-wrap">
-        @using (Ajax.BeginForm("PostComment", "Posts", new AjaxOptions
+
+    <div class="blog-post-all-comments">
+        <div id="comments-container">
+            @foreach (var comment in Model.Comments)
+            {
+                @Html.Partial("_CommentPartial", GetCommentViewModel.FromComment(comment))
+            }
+        </div>
+        <div id="comment-box-wrap">
+            @using (Ajax.BeginForm("PostComment", "Posts", new AjaxOptions
         {
             HttpMethod = "Post",
             InsertionMode = InsertionMode.InsertAfter,
@@ -32,38 +35,40 @@
             OnFailure = "commentPostFailure",
             OnSuccess = "removeCommentBoxText"
         }))
-        {
-            @Html.AntiForgeryToken();
-            
-            if(!User.Identity.IsAuthenticated) 
-            {   
-                <input type="text" name="AuthorName" placeholder="Author name" id="author-name"/><br />
-                <input type="text" name="AuthorEmail" placeholder="Author email" id="author-email"/><br />
+            {
+                @Html.AntiForgeryToken();
+
+                                    if (!User.Identity.IsAuthenticated)
+                                    {
+                                        <input type="text" name="AuthorName" placeholder="Author name" id="author-name" /><br />
+                                        <input type="text" name="AuthorEmail" placeholder="Author email" id="author-email" /><br />
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" name="AuthorName" value="@User.Identity.Name" /><br />
+                                        <input type="hidden" name="AuthorEmail" value="somemail@abv.org" />
+                                    }
+                                    <input type="hidden" name="BlogPostId" value="@Model.Id" />
+
+                                    <div id="comment-textarea">
+                                        <textarea name="Comment" placeholder="Write down your comment" id="comment-box"></textarea><br />
+                                        <div>
+                                            Characters:
+                                            <span id="characters-count">0</span>
+                                            /250
+                                        </div>
+                                    </div>
+
+                                    <div class="recaptcha-wrap">
+                                        @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
+                                    </div>
+
+                                    <input type="submit" value="Publish comment" />
+
+                                    <div id="comment-box-err"></div>
             }
-            else {
-                <input type="hidden" name="AuthorName" value="@User.Identity.Name"/><br />
-                <input type="hidden" name="AuthorEmail" value="somemail@abv.org" />
-            }
-            <input type="hidden" name="BlogPostId" value="@Model.Id" />
 
-            <div id="comment-textarea">
-                <textarea name="Comment" placeholder="Write down your comment" id="comment-box"></textarea><br />
-                <div>
-                    Characters:
-                    <span id="characters-count">0</span>
-                    /250
-                </div>
-            </div>
-
-            <div class="recaptcha-wrap">
-                @Html.Recaptcha(theme: Recaptcha.Web.RecaptchaTheme.Clean)
-            </div>
-
-            <input type="submit" value="Publish comment" />
-            
-            <div id="comment-box-err"></div>
-        }
-       
+        </div>
     </div>
 </div>
 

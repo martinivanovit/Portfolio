@@ -9,37 +9,74 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
+        <div class="navbar-inner main-navbar">
             <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" })</li>
-                        <li>@Html.ActionLink("Create", "Create", "Posts")</li>
+
+                    <ul class="nav main-nav">
+                        <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" }, new { @class = "main-nav-link" })</li>
+                        <li>@Html.ActionLink("Work", "Index", "", new { @class = "main-nav-link" })</li>
+                        <li class="selected-nav-item">@Html.ActionLink("Blog", "Index", new { area = "Blog", controller = "Home" }, new { @class = "main-nav-link" })</li>
+                        <li>@Html.ActionLink("Contact me", "Create", "Posts", new { @class = "main-nav-link" })</li>
+                        <li>@Html.ActionLink("About me", "Create", "Posts", new { @class = "main-nav-link" })</li>
                     </ul>
+                    <ul class="nav social-icons" style="float:right;">
+                        <li class="facebook"><a rel="nofollow" href="http://www.facebook.com/" target="_blank" title="Facebook"></a></li>
+                        <li class="google"><a rel="nofollow" href="https://plus.google.com/" target="_blank" title="Google Plus"></a></li>
+                        <li class="linkedin"><a rel="nofollow" href="https://linkedin.com/" target="_blank" title="LinkedIn"></a></li>
+                    </ul>
+
                 </div>
             </div>
         </div>
+        <div class="nav-activate-btn"><span class="nav-activate-inner">Hide</span></div>
     </div>
 
     <div class="container">
-        @RenderBody()
+        <div class="container-fluid">
+            <div class="row-fluid">
+                @RenderBody()
+                <div class="span2">
+                    <div>
+                        @using (Html.BeginForm("Search", "Posts"))
+                        {
+                            <input type="text" name="query" value=""/>
+                            <input type="submit" value="Search" id="search-btn" />
+                        }
+                    </div>
+                    <div>
+                        <p>Archive</p>
+                        <div id="posts-archive"></div>
+                        @using (Ajax.BeginForm("GetGroupedByDate", "Posts", new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "posts-archive"
+                            }))
+                        {
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+            </footer>
+        </div>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-    
+
     @RenderSection("PostCommentHandlerScripts", required: false)
     @RenderSection("blogPostsScript", required: false)
     @RenderSection("richtTextEditor", required: false)
+    <script src="~/Scripts/app/layout-navbar.js"></script>
+    <script>
+        $('#posts-archive').next('form').submit();
+    </script>
+
 </body>
 </html>

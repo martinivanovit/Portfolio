@@ -10,36 +10,152 @@
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "brand" })
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li>@Html.ActionLink("Blog", "Index", "Blog")</li>
-                    </ul>
-                    @Html.Partial("_LoginPartial")
-                </div>
+        <div class="navbar-container">
+            <div class="navbar-background">
+            </div>
+            <div class="navbar-content">
+                <ul>
+                    <li>
+                        <a href="#" class="link-btn">Home / </a>
+                    </li>
+                    <li>
+                        <a href="#about" class="link-btn">About / </a>
+                    </li>
+                    <li>
+                        <a href="#contacts" class="link-btn">Contacts /</a>
+                    </li>
+                    <li>
+                        <a href="#skills" class="link-btn">Skills /</a>
+                    </li>
+                    <li>
+                        <a href="#how" class="link-btn">How /</a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Work /", "Index")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Blog", "Index")
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <div class="main-container">
+        <div class="home-partial">
+            <div>
+                <h1>Home Page</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio. 
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                    Cum sociis natoque penatibus et magnis dis parturient montes, 
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis, 
+                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                </p>
+            </div>
+        </div>
+        <div class="about-partial" id="about">
+            <div>
+                <h1>About Me</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                    Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
+                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                </p>
+            </div>
+        </div>
+        <div class="how-was-made-partial" id="how">
+            <div>
+                <h1>How was made</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                    Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
+                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                </p>
+            </div>
+        </div>
+        <div class="skills-partial" id="skills">
+            <div>
+                <h1>Skills</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                    Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
+                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                </p>
+            </div>
+        </div>
+        <div class="contacts-partial" id="contacts">
+            <div>
+                <h1>Contacts</h1>
+                <p>Get in touch</p>
+                <div class="facebook-btn"></div>
+                <div class="google-btn"></div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed ac lectus velit. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                    Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Nulla vel urna elementum, vestibulum felis venenatis,
+                    tincidunt neque. Cum sociis natoque penatibus et magnis dis parturient montes,
+                    nascetur ridiculus mus. Sed id sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, sollicitudin elit, ac venenatis odio.
+                    Nulla vel urna elementum, vestibulum felis venenatis, tincidunt neque.
+                </p>
+                <form class="email-form">
+                    <input type="text" name="name" value="" placeholder="You Email Here" /> <br />
+                    <textarea placeholder="Your Message Here"></textarea>
+                </form>
+            </div>
+
+            @RenderBody()
+            <footer style="margin:0;padding:0;height: 10px;">
+                <p style="margin:0;padding:0">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script>
+        $('.link-btn').on('click', function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            var id = $(this).attr('href');
+
+            var topPosition = 0;
+            if (id.length > 1) {
+                topPosition = $(id).offset().top;
+            }
+
+            $('html, body').animate({
+                scrollTop: topPosition
+            }, 500, function () {
+                window.location.hash = id;
+            });
+        });
+    </script>
 </body>
 </html>

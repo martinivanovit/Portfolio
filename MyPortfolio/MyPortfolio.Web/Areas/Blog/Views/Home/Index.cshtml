@@ -6,47 +6,31 @@
 
 <h2>Blog Posts</h2>
 
-<div class="container-fluid">
-    <div class="row">
-        @using (Html.BeginForm("Search", "Posts"))
+<div class="span8">
+    <div id="blog-posts-container">
+        @{Html.RenderPartial("_BlogPostsList", Model);}
+    </div>
+
+    <div class="load-more-form">
+        @using (Ajax.BeginForm("GetPosts", "Home", new AjaxOptions
+            {
+                HttpMethod = "Get",
+                InsertionMode = InsertionMode.InsertAfter,
+                UpdateTargetId = "blog-posts-container",
+                OnFailure = "blog.ajaxLoadPostsFailure",
+                OnSuccess = "blog.ajaxLoadPostsSuccess"
+            }))
         {
-            <input type="text" name="query" value="" />
-            <input type="submit" value="Search" id="search-btn" />
+            @Html.Hidden("postsToSkip", "", new { id = "posts-to-skip" })
+            <input type="submit" value="Load more" id="load-more-btn" />
         }
+
+        @Html.Hidden("allPostsCount", (int?)ViewBag.AllPostsCount, new { id = "all-posts-count" })
     </div>
-    <div class="row-fluid">
 
-        <div class="span10">
-            <div class="row-fluid" id="blog-posts-container">
-                @{Html.RenderPartial("_BlogPostsList", Model);}
-            </div>
-
-            <div class="load-more-form">
-                @using (Ajax.BeginForm("GetPosts", "Home", new AjaxOptions
-                    {
-                        HttpMethod = "Get",
-                        InsertionMode = InsertionMode.InsertAfter,
-                        UpdateTargetId = "blog-posts-container",
-                        OnFailure = "blog.ajaxLoadPostsFailure",
-                        OnSuccess = "blog.ajaxLoadPostsSuccess"
-                    }))
-                {
-                    @Html.Hidden("postsToSkip", "", new { id = "posts-to-skip" })
-                    <input type="submit" value="Load more" id="load-more-btn" />
-                }
-
-                @Html.Hidden("allPostsCount", (int?)ViewBag.AllPostsCount, new { id = "all-posts-count" })
-            </div>
-
-        </div>
-
-        <div class="span2">
-            <!--Sidebar content-->
-        </div>
-
-    </div>
 </div>
 
+        
 @section blogPostsScript {
     <script>
         var blog = {};

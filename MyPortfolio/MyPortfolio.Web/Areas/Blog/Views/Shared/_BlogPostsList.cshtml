@@ -2,33 +2,45 @@
 
 @foreach (var blogPost in Model)
 {
-    <div class="blog-post-item">
-
-        <div class="blog-post-item-header">
-            <h3>
-                <a href="/Blog/Posts/Details/@blogPost.Id">@blogPost.Title</a>
-            </h3>
-            <span>Created at: @blogPost.CreationDate.ToShortDateString()</span>
+    <div class="row-fluid" style="margin-bottom: 5%;">
+        <div class="span7" style="border: 1px solid black; height: 310px">
+            <img style="height:100%;width:100%;" src="http://placehold.it/424x308" >
         </div>
+        <div class="blog-post-item span5">
 
-        <div class="blog-post-item-content">
-            @Html.Raw(blogPost.Content)
+            <div class="blog-post-item-header">
+                <h3>
+                    <a href="/Blog/Posts/Details/@blogPost.Id">@blogPost.Title</a>
+                </h3>
+            </div>
+
+            <div class="blog-post-item-content">
+                @{ var maxContentLength = blogPost.Content.Length;
+                   var maxShowLength = 300; 
+                   if (maxShowLength >= maxContentLength) 
+                   {
+                       maxShowLength = maxContentLength;
+                   }
+                }
+                @Html.Raw(blogPost.Content.Substring(0, maxShowLength))
+            </div>
+
+            <div class="blog-post-item-footer" style="margin-top: 20px">
+                <span style="background: red">@blogPost.CreationDate.ToShortDateString()</span><br />
+                @*<span>@blogPost.ViewsCount views</span><br />*@
+                <a href="#" class="show-recent-comments">Show recent comments</a>
+            </div>
+
+            <ul class="recent-comments" style="display:none;">
+                @foreach (var comment in blogPost.Comments)
+                {
+                    <li>
+                        "@comment.Content" by @comment.AuthorName
+                    </li>
+                }
+            </ul>
+
         </div>
-
-        <div class="blog-post-item-footer">
-            <span>@blogPost.ViewsCount views</span><br />
-            <a href="#" class="show-recent-comments">Show recent comments</a>
-        </div>
-
-        <ul class="recent-comments" style="display:none;">
-            @foreach (var comment in blogPost.Comments)
-            {
-                <li>
-                    "@comment.Content" by @comment.AuthorName
-                </li>
-            }
-        </ul>
-
     </div>
 }
 

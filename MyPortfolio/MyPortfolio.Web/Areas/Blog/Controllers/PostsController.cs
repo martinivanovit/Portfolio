@@ -212,5 +212,37 @@ namespace MyPortfolio.Web.Areas.Blog.Controllers
 
             return View(resultModel);
         }
+
+
+        public ActionResult GetGroupedByDate()
+        {
+            var result = this.Data
+                .BlogPosts.All()
+                .GroupBy(post => post.CreationDate.Year);
+
+            var model = new List<BlogArchiveYearViewModel>();
+
+            foreach (var postsByYear in result.ToList())
+            {
+                var blogArchiveYear = new BlogArchiveYearViewModel();
+                var postByYear = postsByYear.GroupBy(post => post.CreationDate.Month);
+                
+                blogArchiveYear.Year = postsByYear.Key;
+
+                foreach (var postsByMonth in postByYear)
+                {
+                    var blogArchiveMont = new BlogArchiveMonthViewModel
+                        {
+                            Date = postsByMonth.First().CreationDate,
+                            PostsCount = postsByMonth.Count()
+                        };
+                    blogArchiveYear.Months.Add(blogArchiveMont);
+                }
+
+                model.Add(blogArchiveYear);
+            }
+            
+            return PartialView("_BlogArchiveList", model);
+        }
 	}
 }

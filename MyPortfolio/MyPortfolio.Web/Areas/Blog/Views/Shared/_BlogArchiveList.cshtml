@@ -1,0 +1,20 @@
+﻿@using System.Globalization
+@model IEnumerable<BlogArchiveYearViewModel>
+<ul>
+    @foreach (var year in Model)
+    {
+        <li>
+            @year.Year
+            <ul>
+                @foreach (var date in year.Months)
+                {
+                    <li>
+                        @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(date.Date.Month) 
+                        (@date.PostsCount)
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+    
+</ul>
