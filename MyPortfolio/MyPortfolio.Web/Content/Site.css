@@ -70,21 +70,29 @@ input[type="checkbox"].input-validation-error {
 
 .projects-wrap {
     display: none;
+    background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.02) 2%, rgba(255,255,255,0.02) 19%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(2%,rgba(255,255,255,0.02)), color-stop(19%,rgba(255,255,255,0.02)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.02) 2%,rgba(255,255,255,0.02) 19%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.02) 2%,rgba(255,255,255,0.02) 19%,rgba(255,255,255,0) 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,0.02) 2%,rgba(255,255,255,0.02) 19%,rgba(255,255,255,0) 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  rgba(255,255,255,0.02) 2%,rgba(255,255,255,0.02) 19%,rgba(255,255,255,0) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#05ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }   
 
 .project-image-wrap {
     display: inline-block;
     width: 100%;
-    height: 300px;
+    height: 220px;
     background-size: 100% 100%;
     margin: 10px;
     float: left;
     position: relative;
+    
 }
 
 .project-img-cover {
-    opacity: 0.9;
-    background: #527578;
+    /*opacity: 0.9;*/
+    background: #FFB759;
     color: white;
     display: none;
     width: 1px;
@@ -92,21 +100,18 @@ input[type="checkbox"].input-validation-error {
     position: absolute;
 }
 .project-img-cover > div {
-    margin: 60px auto;
+    font-family: Corbel;
+    margin: 30px auto;
     width: 200px; 
     height:100px;
 }
-.project-img-cover > div h2 {
+.project-img-cover > div h3 {
     font-size: 18pt;
-    line-height: 10px;
-}
-
-.project-img-cover > div p:hover {
-    background: #90CA77;
-    /*height: 100%;*/
+    line-height: 22px;
 }
 
 .project-img-cover > div p {
+    font-size: 15px;
     overflow:hidden;
     height: 98%;
 }
@@ -114,8 +119,8 @@ input[type="checkbox"].input-validation-error {
 .project-link {
     text-shadow: none;
     box-shadow: none;
-    margin-bottom: 15px;
-    margin-left: 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     padding-left: 10px;
     padding-right: 10px;
     border: none;
@@ -123,35 +128,36 @@ input[type="checkbox"].input-validation-error {
 }
 
 .vertical-pager-page {
+    margin-top: 10px;
+    font-family: AgencyFB;
     list-style-type: none;
 }
 
 .vertical-pager-page > a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 12pt;    
+    font-weight: bold;  
+    color: white;
     display: block;
-    width: 30px;
-    height: 30px;
-    margin-bottom: 5px;
-    background:#47423F;
-    transition:transform 300ms;
-    -webkit-transition: -webkit-transform 300ms;
-    -o-transition: -o-transform 300ms;
-    -moz-transition: -moz-transform 300ms;
+    width: 23px;
+    height: 20px;
+    padding-top: 2px;
+    margin-bottom: 10px;
+    background:#6F7E89;
+    border-radius: 50%;
 }
 
 .vertical-pager-selected > a {
-    background: #527578;
+    background: #FFB759;
 }
 
 .vertical-pager-page:hover > a {
-    background: gray;
-    transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -ms-transform:rotate(90deg); /* IE 9 */
-    -webkit-transform:rotate(90deg); /* Safari and Chrome */
+    background: #FFB759;
 
 }
 .vertical-pager-selected:hover > a:hover {
-    background: gray;
+    background: #FFB759;
 }
 
 /*----------------------------------*/
@@ -231,49 +237,3 @@ input[type="checkbox"].input-validation-error {
     height:60px; 
     margin: 30px;*/
 }
-
-/*------------------*/
-
-/*Social icons styles*/
-
-.social-icons {
-    float:right;
-}
-
-    .social-icons li {
-        margin-top: -5px;
-         height: 45px;
-         overflow: hidden;
-    }
-
-.social-icons li a {
-    background: url('../img/social-sprite.png') no-repeat;
-    display: inline-block;
-    width: 20px;
-    height: 100%;
-}
-
-.social-icons li.facebook a {
-    background-position: 0 0;
-}
-.social-icons li.linkedin a {
-    background-position: -202px 0;
-}
-.social-icons li.google a {
-    background-position: -150px 0;
-}
-
-.social-icons li.facebook a:hover {
-    background-position: 0 -50px;
-        
-}
-.social-icons li.linkedin a:hover {
-    background-position: -202px -50px;
-        
-}
-.social-icons li.google a:hover {
-    background-position: -150px -50px;
-        
-}
-
-/*--------------------*/

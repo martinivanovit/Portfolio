@@ -28,8 +28,7 @@ namespace MyPortfolio.Web
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/bootstrap-responsive.css",
-                      "~/Content/jQueryTE/jquery-te-1.4.0.css",
-                      "~/Content/home-area-styles.css"));
+                      "~/Content/jQueryTE/jquery-te-1.4.0.css"));
            
         }
     }

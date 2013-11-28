@@ -1,0 +1,191 @@
+﻿body {
+    background: #16232E;
+}
+header,body,nav, div, ul, li {
+    padding: 0;
+    margin: 0;
+}
+li {
+    list-style-type: none;
+}
+
+header > section {
+    background: #182936;
+    height: 70px;
+    width: 100%;
+    /*border-bottom: 1px solid white;*/
+}
+header nav,
+header section ul,
+header ul > li,
+header section div,
+header section article {
+    display: inline-block;
+    color: white;
+}
+header section > article,
+header section > div,
+header section ul {
+    margin-top: 16px;
+    margin-left: 40px;
+    float: left;
+}
+
+#menu-btn {
+    margin-left: 10px;
+    line-height: 5px;
+    width: 30px;
+    height: 54px;
+    padding: 0 10px 0 10px;
+}
+    #menu-btn:hover {
+        /*background: #792B35;*/
+    }
+     
+#menu-icon {
+    margin-top: 5px;
+    width: 30px;
+    height: 26px;
+    background-image: url('../../img/menu-btn.png');
+}
+header section div#right-floated > form {
+    display: inline;
+}
+header section div#right-floated > form > input {
+    display: inline-block;
+    padding:5px 30px 5px 30px;
+    background: #D7482A;
+    color:white;
+    border: none;
+    border-radius:2px;
+    -webkit-box-shadow:-9px 9px 30px rgba(0, 0, 0, 0.46);
+    -moz-box-shadow:-9px 9px 30px rgba(0, 0, 0, 0.46);
+    box-shadow:-9px 9px 30px rgba(0, 0, 0, 0.46);
+}
+header section div#right-floated > form > input:hover {
+    background:red;
+    text-decoration: none;
+}
+
+header .search-bar > input.search-textbox {
+    width: 165px;
+    height: 25px;
+    background: #283844;
+    border: none;
+    border-radius: 0;
+    color: white;
+}
+
+header .search-bar > input.search-textbox:focus {
+    box-shadow: none;
+    background: #323f49;
+}
+
+#search-btn {
+    position: relative;
+    top: 1px;
+    height: 33px;
+    margin-left: -4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /*height: 35px;
+    width: 20px;*/
+    background: #282F3C;
+}
+#search-btn:hover {
+    background: red;
+    cursor: pointer;
+}
+#search-icon {
+    position: relative;
+    top: 4px;
+    width: 22px;
+    height: 26px;
+    background-image: url('../../img/search-btn.png');
+}
+#logo {
+    width: 126px;
+    height: 64px;
+    margin-top: 2px;
+    margin-left: 20%;
+    background-image: url('../../img/logo-martin-white.png');
+}
+
+#right-floated {
+    margin-right: 20px;
+    float: right;
+}
+
+/*------------------Social Icons*/
+
+#social-icons {
+    margin-top: -6px;
+    margin-right: 60px;
+}
+#social-icons li a {
+    background: url('../../img/social-sprite.png') no-repeat;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+#social-icons li a.facebook {
+    background-position: 0 0;
+}
+#social-icons li a.linkedin {
+    background-position: -202px 0;
+}
+#social-icons li a.google-plus {
+    background-position: -150px 0;
+}
+#social-icons li a.facebook:hover {
+    background-position: 0 -50px;
+        
+}
+#social-icons li a.linkedin:hover {
+    background-position: -202px -50px;
+        
+}
+#social-icons li a.google-plus:hover {
+    background-position: -151px -50px;
+        
+}
+
+/*-----------------------*/
+
+/*-----------Nagivation*/
+
+nav > ul {
+    display: none;
+    position: absolute;
+    margin-top: -16px;
+    margin-left: 10px;
+}
+
+nav ul > li {
+    width: 40px;
+    /*background: #1C2A35;*/
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(2%,rgba(24,41,54,1)), color-stop(98%,rgba(22,35,46,0.7)), color-stop(100%,rgba(22,35,46,0.7))); /* Chrome,Safari4+ */
+    
+    font-size: 16pt;
+    padding: 5px;
+    margin-left: -4px;
+    display: block;
+}
+
+nav ul > li > a {
+    color: #bababa;
+    font-size: 12pt;
+    font-weight: bold;
+}
+nav ul > li:hover {
+    background: #D7482A;
+}
+.selected {
+    background: #D7482A;
+}
+nav ul > li > a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/*-------------------*/

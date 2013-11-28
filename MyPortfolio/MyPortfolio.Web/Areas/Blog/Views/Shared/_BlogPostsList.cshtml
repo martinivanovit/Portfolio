@@ -2,9 +2,28 @@
 
 @foreach (var blogPost in Model)
 {
-    <div class="row-fluid" style="margin-bottom: 5%;">
-        <div class="span7" style="border: 1px solid black; height: 310px">
+    <div class="row-fluid post-container" style="margin-bottom: 5%;">
+        <div class="span7">
             <img style="height:100%;width:100%;" src="http://placehold.it/424x308" >
+            <div class="date-cat-container">
+                <div class="date">
+                  <div>@blogPost.CreationDateFormated</div>
+                </div>
+                <div class="category">in [category name]</div>
+                <div class="date-triangle-top"></div>
+                <div class="date-triangle-right"></div>
+
+                <div class="read-more-container">
+                    <a href="/Blog/Posts/Details/@blogPost.Id"
+                       class="read-more-btn">
+                        Read more
+                    </a>
+                    <div class="btn-triangle-top-right"></div>
+                    <div class="btn-triangle-bottom-left"></div>
+                    <div class="btn-top-side"></div>
+                    <div class="btn-left-side"></div>
+                </div>
+            </div>
         </div>
         <div class="blog-post-item span5">
 
@@ -26,11 +45,12 @@
             </div>
 
             <div class="blog-post-item-footer" style="margin-top: 20px">
-                <span style="background: red">@blogPost.CreationDate.ToShortDateString()</span><br />
-                @*<span>@blogPost.ViewsCount views</span><br />*@
-                <a href="#" class="show-recent-comments">Show recent comments</a>
+               
+                @if (blogPost.Comments.Count() > 0)
+                {
+                    <a href="#" class="show-recent-comments btn btn-info">Show recent comments</a>
+                }
             </div>
-
             <ul class="recent-comments" style="display:none;">
                 @foreach (var comment in blogPost.Comments)
                 {

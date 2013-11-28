@@ -1,0 +1,254 @@
+﻿.container {
+    margin: 0;
+    padding: 0;
+    margin-top: -20px;
+}
+
+.posts-wrap {
+    background:#96A0A8;
+    padding-top: 40px;
+    padding-left: 100px;
+}
+
+.aside-right {
+    
+}
+
+.post-container {
+    
+}
+.post-container > div {
+  
+}
+
+/*Date and category style*/
+
+.date-cat-container {
+    margin-top: -45px;
+    margin-left: -15px;
+    position: absolute;
+    font-family: AgencyFB;
+    font-size: 12pt;
+    font-weight:bold;
+}
+
+    .date-cat-container > div {
+        background: #FFB759;
+    }
+.date-cat-container .date {
+    width: 80px;
+    height: 50px;
+    float: left;
+    
+}
+    .date-cat-container .date > div {
+        width: 50px;
+        margin: 5px 22px;
+        
+    }
+
+
+.date-cat-container .category {
+    float:left;
+    text-indent: 5px;  
+    margin-top: 22px;
+    padding-bottom: 5px;
+    padding-top: 3px;
+}
+
+.date-cat-container .date-triangle-top {
+    position:absolute;
+    background: none;
+    margin-top: -15px;
+
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 0 15px 15px;
+    border-color: transparent transparent #D88E2D transparent;
+}
+
+
+
+.date-cat-container .date-triangle-right {
+    position:absolute;
+    background: none;
+    margin-top: 45px;
+    margin-left: 200px;
+
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 5px 5px 0 0;
+    border-color: #D88E2D transparent transparent transparent;
+}
+
+
+
+
+.blog-post-item {
+    padding-right: 40px;
+
+    font-family: Arial;
+    margin-top: -20px;
+    margin-left: 40px;
+}
+
+
+.blog-post-item .blog-post-item-content{
+    color: white;
+    font-size: 14pt;
+    line-height: 22px;
+}
+
+.read-more-btn {
+    color: #BCBCBC;
+    
+}
+
+.blog-post-item-header > h3 > a {
+    color: #3A3A3A;
+}
+
+.blog-post-item-header > h3 > a:hover {
+    color: #FFB759;
+    text-decoration: none;
+}
+
+/*-----------------------*/
+
+.aside-right {
+    float: left;
+    margin-top: 30px;
+    margin-left: 50px;
+    font-family: AgencyFB;
+    color: white;
+}
+
+.aside-right > .aside-field {
+}
+
+.aside-right > .aside-field h4 {
+    font-size: 20pt;
+}
+
+.post-year {
+    font-weight: bold;
+    font-size: 18pt;
+    margin-left: 25px;
+}
+
+.post-year > ul {
+    margin-left: 15px;
+}
+
+.post-year > ul > li {
+
+    font-size: 12pt;
+}
+
+.posts-wrap {
+    float: left;
+}
+
+
+/*Read more btn styles*/
+
+.read-more-btn {
+    position: absolute;
+    margin-left: 278px;
+    margin-top: -10px;
+
+    background: #FFB759;
+    color: #333333;
+    padding: 10px;
+}
+
+   
+
+    .read-more-btn:hover {
+        background:#FFC06A;
+        margin-top: -15px;
+        margin-left: 273px;
+    }
+    
+    .read-more-btn:hover ~ .btn-left-side {
+          width: 10px;
+    }
+    .read-more-btn:hover ~ .btn-top-side {
+        width: 40px;
+        height: 10px;
+        margin-left: 473px;
+    }
+    .read-more-btn:hover ~ .btn-triangle-top-right {
+        border-width: 10px 0 0 10px;
+    }
+    .read-more-btn:hover ~ .btn-triangle-bottom-left{
+        border-width: 0 10px 10px 0;
+    }
+
+   
+
+.date-cat-container .btn-top-side {
+    position:absolute;
+    margin-left: 478px;
+    margin-top: -25px;
+    
+    width: 35px;
+    height: 15px;
+    background-color: #D88E2D;
+}
+
+.date-cat-container .btn-left-side {
+    position:absolute;
+    margin-left: 463px;
+    margin-top: -25px;
+    
+    width: 15px;
+    height: 60px;
+    background-color: #D88E2D;
+}
+
+.date-cat-container .btn-triangle-top-right {
+    position:absolute;
+    background: none;
+    margin-top: -25px;
+    margin-left: 513px;
+
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 15px 0 0 15px;
+    border-color: transparent transparent transparent #D88E2D;
+
+}
+
+.date-cat-container .btn-triangle-bottom-left {
+    position:absolute;
+    margin-left: 463px;
+    margin-top: 35px;
+
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 15px 15px 0;
+    border-color: transparent #D88E2D transparent transparent;
+}
+
+/*---------------------*/
+
+
+/*Mozilla hack*/
+@-moz-document url-prefix() { 
+    .read-more-btn {
+        margin-left: 292px;
+    }
+    .read-more-btn:hover {
+        margin-left: 287px;
+    }
+    .date-cat-container .date-triangle-right {
+        margin-top: 45px;
+        margin-left: 186px;
+    }
+}
+/*-----------*/

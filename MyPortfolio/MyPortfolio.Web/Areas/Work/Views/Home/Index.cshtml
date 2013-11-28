@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h1 style="border-left: 5px solid #333333; padding-left: 10px; ">Works</h1>
+<h1></h1>
 <div class="row">
     <div class="span1">
         <div class="custom-vertical-pager">
@@ -19,7 +19,7 @@
                     }
 
                     <li class="vertical-pager-page @selectedClass">
-                        @Html.ActionLink(" ", "Index", new { page = i + 1 })
+                        @Html.ActionLink((i + 1).ToString(), "Index", new { page = i + 1 })
                     </li>
                 }
             </ul>
@@ -29,13 +29,13 @@
         <div class="row projects-wrap">
             @foreach (var project in Model)
             {
-                <div class="span5">
+                <div class="span3">
                     <div class="project-image-wrap" style="background-image: url('@project.ImageUrl');">
                         <div class="project-img-cover">
                             <div>
                                 <h3>@project.Name</h3>
-                                <a href="@project.DemoUrl" class="project-link btn btn-inverse btn-large"><i class="icon-white icon-th"></i> Demo</a>
-                                <a href="@project.SourceUrl" class="project-link btn btn-success btn-large"><i class="icon-white icon-folder-open"></i> Source</a>
+                                <a href="@project.DemoUrl" class="project-link btn btn-inverse"><i class="icon-white icon-th"></i> Demo</a>
+                                <a href="@project.SourceUrl" class="project-link btn btn-inverse"><i class="icon-white icon-folder-open"></i> Source</a>
                                 <p>@project.Description</p>
                             </div>
                         </div>

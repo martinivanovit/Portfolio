@@ -6,35 +6,59 @@
     <title>@ViewBag.Title - Martin Ivanov Blog</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/blog-work-layout.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner main-navbar">
-            <div class="container">
-                <div class="nav-collapse collapse">
-                    
-                    <ul class="nav main-nav">
-                        <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" }, new { @class = "main-nav-link" })</li>
-                        <li class="selected-nav-item">@Html.ActionLink("Work", "Index", "", new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("Blog", "Index", new { area = "Blog", controller = "Home" }, new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("Contact me", "Create", "Posts", new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("About me", "Create", "Posts", new { @class = "main-nav-link" })</li>
-                    </ul>
-                    <ul class="nav social-icons" style="float:right;">
-                        <li class="facebook"><a rel="nofollow" href="http://www.facebook.com/" target="_blank" title="Facebook"></a></li>
-                        <li class="google"><a rel="nofollow" href="https://plus.google.com/" target="_blank" title="Google Plus"></a></li>
-                        <li class="linkedin"><a rel="nofollow" href="https://linkedin.com/" target="_blank" title="LinkedIn"></a></li>
-                    </ul>
-
+    <header>
+        
+        <section>
+            <div id="menu-btn">
+                @*<span>Explore</span><br />*@
+                <div id="menu-icon"></div>
+            </div>
+            <article class="search-bar">
+                <input type="text" name="Search" value="" class="search-textbox" placeholder="Type here" />
+                <div id="search-btn">
+                    <div id="search-icon"></div>
                 </div>
-             </div>
-        </div>
-        <div class="nav-activate-btn"><span class="nav-activate-inner">Hide</span></div>
-    </div>
+            </article>
+            @*<div id="logo"></div>*@
+            <div id="right-floated">
+                <ul id="social-icons">
+                    <li><a href="#" class="linkedin"></a></li>
+                    <li><a href="#" class="facebook"></a></li>
+                    <li><a href="#" class="google-plus"></a></li>
+                </ul>
+
+                @using (Ajax.BeginForm("ContactForm", "Home", new AjaxOptions
+                {
+                    HttpMethod = "Get",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "Comments",
+                    OnFailure = "commentPostFailure", OnSuccess = "removeCommentBoxText" }))
+                {
+                     <input type="submit" id="contact-btn" value="Contact me"/>
+                }
+
+            </div>
+        </section>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li class="selected"><a href="#">Work</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/#skills">Skills</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
         @RenderBody()
-        <hr />
+
+        <section id="contact-wrap">
+        </section>
+
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
@@ -45,5 +69,49 @@
     @RenderSection("scripts", required: false)
     @RenderSection("projectsHomeScript", required: false)
     <script src="~/Scripts/app/layout-navbar.js"></script>
+
+    <script>
+        var angleDegrees = 0;
+
+        //$('#menu-btn').on('click', function () {
+        //    $('nav > ul').toggle('fast');
+
+        //    var interval = setInterval(function () {
+        //        if (angleDegrees % 180 === 0 && angleDegrees !== 0) {
+        //            clearInterval(interval);
+        //        }
+        //        $('#menu-icon').rotate(angleDegrees);
+        //        angleDegrees++;
+        //    });
+
+        //    var menuText = $('#menu-btn > span');
+        //    if (menuText.text() === 'Explore') {
+        //        menuText.text('Hide');
+        //    } else {
+        //        menuText.text('Explore');
+        //    }
+
+        //});
+
+        $('#menu-btn').on('click', function () {
+            $('nav > ul').slideToggle('fast');
+
+            var interval = setInterval(function () {
+                if (angleDegrees % 180 === 0 && angleDegrees !== 0) {
+                    clearInterval(interval);
+                }
+                $('#menu-icon').rotate(angleDegrees);
+                angleDegrees++;
+            });
+
+            var menuText = $('#menu-btn > span');
+            if (menuText.text() === 'Explore') {
+                menuText.text('Hide');
+            } else {
+                menuText.text('Explore');
+            }
+
+        });
+    </script>
 </body>
 </html>

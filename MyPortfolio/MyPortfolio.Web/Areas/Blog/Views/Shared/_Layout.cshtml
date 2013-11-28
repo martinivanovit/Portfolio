@@ -3,80 +3,149 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Martin Ivanov Blog</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/blog-work-layout.css" rel="stylesheet" />
+    <link href="~/Content/blog-page-styles.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner main-navbar">
-            <div class="container">
-                <div class="nav-collapse collapse">
-
-                    <ul class="nav main-nav">
-                        <li>@Html.ActionLink("Home", "Index", new { area = "", controller = "Home" }, new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("Work", "Index", "", new { @class = "main-nav-link" })</li>
-                        <li class="selected-nav-item">@Html.ActionLink("Blog", "Index", new { area = "Blog", controller = "Home" }, new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("Contact me", "Create", "Posts", new { @class = "main-nav-link" })</li>
-                        <li>@Html.ActionLink("About me", "Create", "Posts", new { @class = "main-nav-link" })</li>
-                    </ul>
-                    <ul class="nav social-icons" style="float:right;">
-                        <li class="facebook"><a rel="nofollow" href="http://www.facebook.com/" target="_blank" title="Facebook"></a></li>
-                        <li class="google"><a rel="nofollow" href="https://plus.google.com/" target="_blank" title="Google Plus"></a></li>
-                        <li class="linkedin"><a rel="nofollow" href="https://linkedin.com/" target="_blank" title="LinkedIn"></a></li>
-                    </ul>
-
-                </div>
+    <header>
+        
+        <section>
+            <div id="menu-btn">
+                @*<span>Explore</span><br />*@
+                <div id="menu-icon"></div>
             </div>
-        </div>
-        <div class="nav-activate-btn"><span class="nav-activate-inner">Hide</span></div>
-    </div>
+            <article class="search-bar">
+                <input type="text" name="Search" value="" class="search-textbox" placeholder="Type here" />
+                <div id="search-btn">
+                    <div id="search-icon"></div>
+                </div>
+            </article>
+            @*<div id="logo"></div>*@
+            <div id="right-floated">
+                <ul id="social-icons">
+                    <li><a href="#" class="linkedin"></a></li>
+                    <li><a href="#" class="facebook"></a></li>
+                    <li><a href="#" class="google-plus"></a></li>
+                </ul>
+
+                @using (Ajax.BeginForm("ContactForm", "Home", new AjaxOptions
+                {
+                    HttpMethod = "Get",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "Comments",
+                    OnFailure = "commentPostFailure", OnSuccess = "removeCommentBoxText" }))
+                {
+                     <input type="submit" id="contact-btn" value="Contact me"/>
+                }
+
+            </div>
+        </section>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li class="selected"><a href="#">Work</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="/#skills">Skills</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="container">
-        <div class="container-fluid">
-            <div class="row-fluid">
+        <section>
+            <article class="posts-wrap">
                 @RenderBody()
-                <div class="span2">
-                    <div>
-                        @using (Html.BeginForm("Search", "Posts"))
-                        {
-                            <input type="text" name="query" value=""/>
-                            <input type="submit" value="Search" id="search-btn" />
-                        }
-                    </div>
-                    <div>
-                        <p>Archive</p>
-                        <div id="posts-archive"></div>
-                        @using (Ajax.BeginForm("GetGroupedByDate", "Posts", new AjaxOptions
-                            {
-                                HttpMethod = "Get",
-                                InsertionMode = InsertionMode.Replace,
-                                UpdateTargetId = "posts-archive"
-                            }))
-                        {
-                        }
-                    </div>
-                </div>
-            </div>
-        </div>
+            </article>
+            <aside class="aside-right">
+                <article class="aside-field">
+                    <h4>Archive</h4>
+                    <ul>
+                        <li class="post-year">
+                            <span>2012</span>
+                            <ul>
+                                <li>January</li>
+                                <li>February</li>
+                                <li>March</li>
+                            </ul>
+                        </li>
+                    </ul>
+                        
+                </article>
 
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>
-        </div>
+                <article class="aside-field">
+                    <h4>Archive</h4>
+                    <ul>
+                        <li class="post-year">
+                            <span>2012</span>
+                            <ul>
+                                <li>January</li>
+                                <li>February</li>
+                                <li>March</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </article>
+
+                <article class="aside-field">
+                    <h4>Archive</h4>
+                    <ul>
+                        <li class="post-year">
+                            <span>2012</span>
+                            <ul>
+                                <li>January</li>
+                                <li>February</li>
+                                <li>March</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </article>
+                    
+            </aside>
+        </section>
+
+        <section id="contact-wrap"></section>       
+    </div>
+
+    <footer>
+        <p>&copy; @DateTime.Now.Year - Martin Ivanov</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap")    
     @RenderSection("scripts", required: false)
-
-    @RenderSection("PostCommentHandlerScripts", required: false)
     @RenderSection("blogPostsScript", required: false)
-    @RenderSection("richtTextEditor", required: false)
+    @RenderSection("PostCommentHandlerScripts", required: false)
+    
+    
     <script src="~/Scripts/app/layout-navbar.js"></script>
-    <script>
-        $('#posts-archive').next('form').submit();
-    </script>
 
+    <script>
+        var angleDegrees = 0;
+
+        $('#menu-btn').on('click', function () {
+            $('nav > ul').slideToggle('fast');
+
+            var interval = setInterval(function () {
+                if (angleDegrees % 180 === 0 && angleDegrees !== 0) {
+                    clearInterval(interval);
+                }
+                $('#menu-icon').rotate(angleDegrees);
+                angleDegrees++;
+            });
+
+            var menuText = $('#menu-btn > span');
+            if (menuText.text() === 'Explore') {
+                menuText.text('Hide');
+            } else {
+                menuText.text('Explore');
+            }
+
+        });
+    </script>
 </body>
 </html>

@@ -10,7 +10,7 @@ namespace MyPortfolio.Web.Areas.Work.Controllers
 {
     public class HomeController : BaseController
     {
-        private const int DEFAULT_PAGE_SIZE = 6;
+        private const int DEFAULT_PAGE_SIZE = 9;
 
         public ActionResult Index(int? page)
         {
